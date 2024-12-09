@@ -1,1 +1,2 @@
-# image-recommendation
+# Image Recommendation system
+
