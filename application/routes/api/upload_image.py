@@ -5,6 +5,7 @@ from flask import request
 import os
 import uuid
 from application.storage.storage_manager import save_json, posts, p_embeddings, images_dir, posts_file, p_embedding_file
+from PIL import Image
 
 UPLOAD_ENABLED = True
 
@@ -13,9 +14,9 @@ def upload_image():
     if not UPLOAD_ENABLED:
         return "Upload is disabled"
     id = uuid.uuid4().hex
-    image = request.files['image']
-
-    keyword = image.filename.split("_")[0]
+    image = Image.open(request.files['image'])
+    
+    keyword = request.files['image'].filename.split("_")[0]
     description = f"[{keyword}] {get_caption(image)}"
     
     post =  {
