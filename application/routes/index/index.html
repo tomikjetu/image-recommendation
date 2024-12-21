@@ -172,13 +172,12 @@
         function getPost() {
             if(loading == true) return;
             setLoading(true);
-            fetch("/get_recommendation"
+            fetch("/get_recommendation")
                 .then(response => response.json())
                 .then(data => {
                     setLoading(false);
                     document.getElementById("post_image").src = "/image/" + data.id;
                 })
-            )
         }
 
         // Function to like a post

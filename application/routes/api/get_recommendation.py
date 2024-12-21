@@ -32,5 +32,5 @@ def get_recommendation():
     recommendation = recommendation_storage[user_id].pop(0)
     users[user_id].has_seen.append(recommendation)
     save_users()
-    resp.set_data(jsonify(recommendation).get_data())
+    resp.set_data(jsonify({"id": recommendation}).get_data())
     return resp;

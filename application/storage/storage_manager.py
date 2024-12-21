@@ -53,7 +53,6 @@ def load_users():
         user.liked_posts = user_data["liked_posts"]
         user.has_seen = user_data["has_seen"]
         users[user_id] = user
-    print(users)
 
 def save_users():
     users_data = {}
