@@ -6,6 +6,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  
 
 import application.routes.index.index
+import application.routes.api.upload_image
 
 def run(): 
     print("Starting server")
