@@ -1,2 +1,2 @@
 __pycache__
-application/storage/*[.json|.jpg]
+application/storage/**/*[.json|.jpg]

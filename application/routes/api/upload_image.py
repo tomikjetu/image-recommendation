@@ -6,8 +6,12 @@ import os
 import uuid
 from application.storage.storage_manager import save_json, posts, p_embeddings, images_dir, posts_file, p_embedding_file
 
+UPLOAD_ENABLED = True
+
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
+    if not UPLOAD_ENABLED:
+        return "Upload is disabled"
     id = uuid.uuid4().hex
     image = request.files['image']
 

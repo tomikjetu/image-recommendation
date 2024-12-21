@@ -29,4 +29,3 @@ posts = load_json(posts_file, [])
 p_embeddings = load_json(p_embedding_file, {})
 users = load_json(users_file, [])
 u_embeddings = load_json(u_embedding_file, {})
-
