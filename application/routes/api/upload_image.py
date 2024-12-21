@@ -1,32 +1,29 @@
 from application.app import app
+from embedding.post_embedding import embed_post
+from image_caption.image_caption import get_caption
 from flask import request
 import os
-import json
-
-storage_dir = "application/storage"
-os.makedirs(storage_dir, exist_ok=True)
-images_dir = os.path.join(storage_dir, "images")
-os.makedirs(images_dir, exist_ok=True)
-data_file = os.path.join(storage_dir, "data.json")
-
-def load_data():
-    try:
-        with open(data_file, "r") as f:
-            data = json.load(f)
-    except:
-        data = []
-    return data
-
-def save_data(data):
-    with open(data_file, "w") as f:
-        json.dump(data, f)
-
-data = load_data()
+import uuid
+from application.storage.storage_manager import save_json, posts, p_embeddings, images_dir, posts_file, p_embedding_file
 
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
+    id = uuid.uuid4().hex
     image = request.files['image']
-    image.save(os.path.join(images_dir, image.filename))
-    data.append(image.filename)
-    save_data(data)
 
+    keyword = image.filename.split("_")[0]
+    description = f"[{keyword}] {get_caption(image)}"
+    
+    post =  {
+        "id": id,
+        "description": description
+    }
+    posts.append(post)
+
+    embedding = embed_post(post)
+    p_embeddings[id] = embedding
+
+    image.save(os.path.join(images_dir, f"{id}.jpg"))
+    save_json(posts_file, posts)
+    save_json(p_embedding_file, p_embeddings)
+    return "Image uploaded successfully"

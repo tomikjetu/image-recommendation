@@ -47,7 +47,7 @@ def download_images(keyword, urls):
                     new_height = int(float(image.height) * ratio)
                     image = image.resize((max_width, new_height), Image.Resampling.LANCZOS)
 
-                image_path = os.path.join(directory, f"{image_id}.jpg")
+                image_path = os.path.join(directory, f"{keyword}_{image_id}.jpg")
                 image.save(image_path, "JPEG")
                 print(f"{idx}. Downloaded and resized {image_id} to {image_path}")
             else:
