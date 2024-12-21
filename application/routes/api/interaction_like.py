@@ -1,6 +1,6 @@
 from application.app import app
 from flask import request
-from application.storage.storage_manager import users, User, save_users
+from application.storage.storage_manager import users, save_json, users_file
 
 @app.route('/like', methods=['POST'])
 def like():
@@ -12,9 +12,14 @@ def like():
         return {'error': 'Invalid request'}, 400
 
     if user_id not in users:
-        users[user_id] = User(user_id)
+        users[user_id] = {
+            'liked_posts': [],
+            'has_seen': []
+        }
     user = users[user_id]
-    user.like(post_id)
-    save_users()
+
+    if post_id not in user.liked_posts:
+        user["liked_posts"].append(post_id)
+        save_json(users_file, users)
 
     return {'message': 'Post liked'}, 200
