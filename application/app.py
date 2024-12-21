@@ -8,6 +8,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 import application.routes.index.index
 import application.routes.api.upload_image
 import application.routes.api.get_image
+import application.routes.api.get_recommendation
+import application.routes.api.interaction_like
 
 def run(): 
     print("Starting server")

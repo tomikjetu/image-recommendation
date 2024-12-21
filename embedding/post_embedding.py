@@ -1,8 +1,8 @@
-from sentence_transformers import SentenceTransformer
+from models_manager import get_sentence_transformer_model
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def embed_post(post):     
+    model = get_sentence_transformer_model()
     description = f"{post['description']}"
 
     embedding = model.encode(description)

@@ -1,7 +1,6 @@
 from application.app import app
 from flask import request
-from application.storage.storage_manager import users, save_json, users_file
-from application.storage.user import User
+from application.storage.storage_manager import users, User, save_users
 
 @app.route('/like', methods=['POST'])
 def like():
@@ -16,6 +15,6 @@ def like():
         users[user_id] = User(user_id)
     user = users[user_id]
     user.like(post_id)
-    save_json(users_file, users)
+    save_users()
 
     return {'message': 'Post liked'}, 200
