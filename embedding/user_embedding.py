@@ -20,6 +20,6 @@ def embed_user(user_id):
     user["updated"] = False
 
     save_json(users_file, users)
-    save_json(p_embeddings_file, p_embeddings)
+    save_json(p_embedding_file, p_embeddings)
 
     return combined_embedding
