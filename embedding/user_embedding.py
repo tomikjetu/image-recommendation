@@ -1,7 +1,7 @@
 from models_manager import get_sentence_transformer_model
 import numpy as np
 
-from application.storage.storage_manager import users, p_embeddings, save_json, users_file, p_embeddings_file
+from application.storage.storage_manager import users, p_embeddings, save_json, users_file, p_embedding_file
 
 def embed_user(user_id):     
     user = users[user_id]
