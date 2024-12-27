@@ -35,6 +35,10 @@ def get_recommendation():
         recommendation_storage[user_id] = similar_posts(user_id)
         # collaborative filtering
 
+    if(len(recommendation_storage[user_id])==0):
+        resp.set_data(jsonify({"id": None}).get_data())
+        return resp
+
     recommendation = recommendation_storage[user_id].pop(0)
     users[user_id]["has_seen"].append(recommendation)
     save_json(users_file, users)
