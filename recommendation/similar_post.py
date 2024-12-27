@@ -3,13 +3,14 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from application.storage.storage_manager import users, p_embeddings
 from embedding.user_embedding import embed_user
+from recommendation.cold_start import cold_start
 
 def similar_posts(user_id, top_n=5):
     user = users[user_id]
     seen_posts = user["has_seen"]
     u_embedding = embed_user(user_id)
     if(len(u_embedding)==0):
-        return []
+        return cold_start()
 
     candidate_ids = [post_id for post_id in p_embeddings if post_id not in seen_posts]
     candidate_embeddings = [p_embeddings[post_id] for post_id in p_embeddings if post_id not in seen_posts]    

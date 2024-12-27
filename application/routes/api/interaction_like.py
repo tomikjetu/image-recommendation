@@ -14,7 +14,8 @@ def like():
     if user_id not in users:
         users[user_id] = {
             'liked_posts': [],
-            'has_seen': []
+            'has_seen': [],
+            'updated': False
         }
     user = users[user_id]
 

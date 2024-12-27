@@ -4,8 +4,9 @@ from application.app import app
 from flask import request, jsonify
 import uuid
 
-from application.storage.storage_manager import recommendation_storage, users, save_json, users_file
+from application.storage.storage_manager import users, recommendation_storage, save_json, users_file
 from recommendation.similar_post import similar_posts
+from recommendation.similar_user import similar_users
 
 @app.route('/get_recommendation', methods=['GET'])
 def get_recommendation():
@@ -17,14 +18,16 @@ def get_recommendation():
         resp.set_cookie('user_id', user_id)
         users[user_id] = {
             "liked_posts": [],
-            "has_seen": []
+            "has_seen": [],
+            "updated": False
         }
         save_json(users_file, users)
 
     if user_id not in users:
         users[user_id] = {
             "liked_posts": [],
-            "has_seen": []
+            "has_seen": [],
+            "updated": False
         }
         save_json(users_file, users)
 
@@ -34,6 +37,7 @@ def get_recommendation():
     if len(recommendation_storage[user_id]) == 0:
         recommendation_storage[user_id] = similar_posts(user_id)
         # collaborative filtering
+        sim_users = similar_users(user_id)
 
     if(len(recommendation_storage[user_id])==0):
         resp.set_data(jsonify({"id": None}).get_data())
