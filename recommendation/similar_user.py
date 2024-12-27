@@ -18,7 +18,5 @@ def similar_users(user_id, top_n=5):
     user_similarity_pairs = list(zip(candidate_ids, similarities))
     sorted_pairs = sorted(user_similarity_pairs, key=lambda x: x[1], reverse=True)
     
-    print(sorted_pairs)
-
     sorted_users = [u_id for u_id, _ in sorted_pairs]
     return sorted_users[:top_n]

@@ -38,6 +38,8 @@ def get_recommendation():
         recommendation_storage[user_id] = similar_posts(user_id)
         # collaborative filtering
         sim_users = similar_users(user_id)
+        # [('jozko', np.float64(0.7205783372990653))]
+        # get post from each user
 
     if(len(recommendation_storage[user_id])==0):
         resp.set_data(jsonify({"id": None}).get_data())
