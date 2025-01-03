@@ -56,8 +56,30 @@ def download_images(keyword, urls):
             print(f"{idx}. Error downloading or processing image {image_id}: {e}")
 
 
+# 46 classes
+# animals: 15
+# cars: 2
+# home: 4
+# nature: 8
+# space: 17
+
 if __name__ == "__main__":
-    keywords = ["cats", "dogs", "birds"]
+    keywords = ["cat", "dog", "bird", "lion", "tiger", 
+                "horse", "shark", "whale", "elephant", "penguin", 
+                "panda", "bear", "dolphin", "fish", "parrot"
+                
+    "sportscar", "luxury car", 
+
+    "interior", "house", "garden", "front yard",
+
+    "beach", "mountain", "forest", "desert", "waterfall",
+      "river", "lake", "island",
+    
+    "sunset", "sunrise", "night sky", "starry night", "galaxy",
+      "moon", "universe", "cosmos", "astronomy", "comet",
+        "meteor", "eclipse",  "black hole", "telescope", "satellite", 
+        "space station", "spaceship"
+                ]
     for keyword in keywords:
         num_pages = 4  # Number of pages you want to fetch
         per_page = 12  # Number of images per page
