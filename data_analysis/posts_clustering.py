@@ -28,7 +28,7 @@ embeddings_matrix = np.array([embeddings[key] for key in keys])
 pca = PCA(n_components=2)
 projected = pca.fit_transform(embeddings_matrix)
 
-n_clusters = 5
+n_clusters = 8
 kmeans = KMeans(n_clusters=n_clusters, random_state=42)
 labels = kmeans.fit_predict(projected)
 

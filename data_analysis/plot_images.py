@@ -7,11 +7,10 @@ import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import Image
 
-
 storage_dir = "../application/storage"
 post_embeddings = os.path.join(storage_dir, "p_embeddings.json")
 images_folder = os.path.join(storage_dir, "images")
-n_images = 1500
+n_images = 600
 
 def load_json(file, default={}):
     try:
@@ -22,7 +21,7 @@ def load_json(file, default={}):
     return data
 
 embeddings = load_json(post_embeddings)
-keys = list(embeddings.keys())[:n_images]  
+keys = list(embeddings.keys())
 embeddings_matrix = np.array([embeddings[key] for key in keys])
 
 pca = PCA(n_components=2)
@@ -42,18 +41,20 @@ def load_image(file_path, size=(30, 30)):
         return None
 
 fig, ax = plt.subplots(figsize=(12, 12))
-ax.set_title('2D Projection of Image Embeddings', fontsize=16)
+ax.set_title(f'2D Principal analysis showing {n_images} images', fontsize=16)
 ax.set_xlabel(f'Principal Component 1 ({pca.explained_variance_ratio_[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({pca.explained_variance_ratio_[1]*100:.2f}% variance)')
 
-for i, (x, y) in enumerate(projected):
+random_indices = np.random.choice(len(projected), n_images, replace=False)
+for i in random_indices:
+    x, y = projected[i]
     image_path = os.path.join(images_folder, f"{keys[i]}.jpg")
     img = load_image(image_path)
     if img is not None:
-        imagebox = OffsetImage(img, zoom=0.5)
+        imagebox = OffsetImage(img, zoom=0.75)
         ab = AnnotationBbox(imagebox, (x, y), frameon=False)
         ax.add_artist(ab)
 
-scatter = ax.scatter(projected[:, 0], projected[:, 1], c=labels, cmap='tab10', s=10, alpha=0.6)
+scatter = ax.scatter(projected[:, 0], projected[:, 1], c=labels, cmap='tab10', s=10, alpha=0)
 
 plt.show()
