@@ -10,7 +10,7 @@ from PIL import Image
 storage_dir = "../application/storage"
 post_embeddings = os.path.join(storage_dir, "p_embeddings.json")
 images_folder = os.path.join(storage_dir, "images")
-n_images = 600
+n_images = 700
 
 def load_json(file, default={}):
     try:

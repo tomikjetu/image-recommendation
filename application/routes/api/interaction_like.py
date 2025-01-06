@@ -19,7 +19,7 @@ def like():
         }
     user = users[user_id]
 
-    if post_id not in user.liked_posts:
+    if post_id not in user["liked_posts"]:
         user["liked_posts"].append(post_id)
         user["updated"] = True
         save_json(users_file, users)

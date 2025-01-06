@@ -13,8 +13,14 @@ def embed_user(user_id):
     if(not user["updated"] and user_id in u_embeddings):
         return np.array(u_embeddings[user_id])
     
-    liked_embeddings = [p_embeddings[post_id] for post_id in liked_posts]
-    combined_embedding = np.mean(liked_embeddings, axis=0).reshape(1, -1)
+    # liked_embeddings = [p_embeddings[post_id] for post_id in liked_posts]
+    # combined_embedding = np.mean(liked_embeddings, axis=0).reshape(1, -1)
+
+    # adjust this algorithm
+    last_20_embeddings = [p_embeddings[post_id] for post_id in liked_posts[-20:]]
+    weights = np.arange(1, len(last_20_embeddings) + 1)
+    weights = weights / weights.sum()  
+    combined_embedding = np.average(last_20_embeddings, axis=0, weights=weights).reshape(1, -1)
 
     u_embeddings[user_id] = combined_embedding.tolist()
     user["updated"] = False

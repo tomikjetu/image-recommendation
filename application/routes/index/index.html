@@ -177,6 +177,7 @@
                 .then(data => {
                     setLoading(false);
                     document.getElementById("post_image").src = "/image/" + data.id;
+                    document.getElementById("like_button").onclick = () => likePost(data.id);
                 })
         }
 
