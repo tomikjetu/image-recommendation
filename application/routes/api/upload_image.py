@@ -1,6 +1,5 @@
 from application.app import app
-from embedding.post_embedding import embed_post
-from image_caption.image_caption import get_caption
+from image_caption.image_embedding import get_image_embedding
 from flask import request
 import os
 import uuid
@@ -16,17 +15,17 @@ def upload_image():
     id = uuid.uuid4().hex
     image = Image.open(request.files['image'])
     
-    keyword = request.files['image'].filename.split("_")[0]
-    description = f"[{keyword}] {get_caption(image)}"
+    # keyword = request.files['image'].filename.split("_")[0]
+    # description = f"[{keyword}] {get_caption(image)}"
     
     post =  {
-        "id": id,
-        "description": description
+        "id": id
     }
     posts.append(post)
 
-    embedding = embed_post(post)
-    p_embeddings[id] = embedding
+    # embedding = embed_post(post)
+    embedding = get_image_embedding(image)
+    p_embeddings[id] = embedding.tolist()[0]
 
     image.save(os.path.join(images_dir, f"{id}.jpg"))
     save_json(posts_file, posts)

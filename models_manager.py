@@ -20,3 +20,10 @@ def get_caption_model():
     caption_processor = ViTImageProcessor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
     caption_tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
     return caption_model, caption_processor, caption_tokenizer
+
+def get_embedding_model():
+    from transformers import CLIPProcessor, CLIPModel
+    model_name = "openai/clip-vit-base-patch32"
+    model = CLIPModel.from_pretrained(model_name)
+    processor = CLIPProcessor.from_pretrained(model_name)
+    return model, processor
