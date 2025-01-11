@@ -77,12 +77,13 @@ explained_variance = pca.explained_variance_ratio_
 
 labels = []
 
-for emb in projected_embeddings:
-    similarities = cosine_similarity([emb], projected_topics).flatten()
+for emb in embeddings_matrix:
+    similarities = cosine_similarity([emb], new_topic_embeddings_matrix).flatten()
     closest_topic_index = np.argmax(similarities)
     labels.append(closest_topic_index)
 
 labels = np.array(labels)
+
 
 # Plotting
 fig, ax = plt.subplots(figsize=(10, 10))
@@ -90,34 +91,15 @@ scatter = ax.scatter(
     projected_embeddings[:, 0],
     projected_embeddings[:, 1],
     c=labels,
+    cmap='tab10',
     s=50,
-    alpha=0.6,
+    alpha=0.8,
     label='Image Embeddings'
 )
-
-# Plot new topic centers
-ax.scatter(
-    projected_topics[:, 0],
-    projected_topics[:, 1],
-    c='red',
-    marker='x',
-    s=100,
-    label='Topic Centers'
-)
-
-for i, topic in enumerate(topic_keys):
-    ax.text(
-        projected_topics[i, 0],
-        projected_topics[i, 1],
-        topic,
-        fontsize=9,
-        ha='right'
-    )
 
 ax.set_title('2D Projection of Image Embeddings and Updated Topic Centers')
 ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
-ax.legend()
 
 # Interactivity: Image Preview
 def on_click(event):
