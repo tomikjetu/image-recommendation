@@ -27,6 +27,7 @@ def similar_posts(user_id, top_n=5):
     sorted_posts = [post_id for post_id, _ in sorted_pairs]
 
     # adjust this algorithm
+    # use a neural network instead
     recommendation = sorted_posts[:top_n] 
     recommendation.append(sorted_posts[-1])
     return recommendation
