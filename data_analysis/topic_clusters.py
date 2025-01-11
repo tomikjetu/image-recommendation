@@ -28,51 +28,16 @@ embeddings = load_json(post_embeddings)
 keys = list(embeddings.keys())
 embeddings_matrix = np.array([embeddings[key] for key in keys])
 
-# Load topic embeddings
 keywords = [
-    # Animals
-    "cat", "dog", "bird", "lion", "tiger", 
-    "horse", "shark", "whale", "elephant", "penguin", 
-    "panda", "bear", "dolphin", "fish", "parrot", 
-    "wolf", "fox", "zebra", "koala", "kangaroo", 
-    "turtle", "crocodile", "flamingo", "owl", "chameleon",
-
-    # Cars and Vehicles
-    "sportscar", "luxury car", "SUV", "motorcycle", "truck", 
-    "racing car", "electric car", "convertible", "yacht", 
-    "airplane", "train", "helicopter",
-
-    # Home and Interior
-    "interior", "house", "garden", "front yard", "kitchen", 
-    "living room", "bedroom", "bathroom", "office space", 
-    "balcony", "patio", "pool", "apartment", "skyscraper",
-
-    # Nature and Landscapes
-    "beach", "mountain", "forest", "desert", "waterfall", 
-    "river", "lake", "island", "volcano", "glacier", 
-    "canyon", "meadow", "savannah", "cliff", "cave", 
-    "coral reef", "snowfield", "fjord",
-
-    # Sports and Activities
-    "soccer", "basketball", "tennis", "baseball", "swimming", 
-    "cycling", "running", "skiing", "surfing", "yoga", 
-    "hiking", "camping", "skateboarding", "fishing", "golf",
-
-    # Food and Cuisine
-    "pizza", "burger", "sushi", "pasta", "ice cream", 
-    "salad", "coffee", "tea", "cake", "bread", 
-    "fruit basket", "vegetables", "barbecue", "street food", "wine",
-
-    # Technology and Gadgets
-    "smartphone", "laptop", "smartwatch", "drone", "robot", 
-    "gaming console", "keyboard", "circuit board", 
-    "satellite dish", "solar panel", "3D printer", "electric scooter",
-
-    # Art and Culture
-    "painting", "sculpture", "museum", "theater", 
-    "photography", "street art", "calligraphy", "literature", 
-    "architecture", "pottery", "music instrument",
-    "festival", "carnival"
+    "animal",
+    "vehicle",
+    "building",
+    "landscape",
+    "sport",
+    "food",
+    "technology",
+    "culture and art",
+    "room interior"
 ]
 
 model_name = "openai/clip-vit-base-patch32"

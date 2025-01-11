@@ -4,13 +4,11 @@ import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import normalize
 import matplotlib.pyplot as plt
-import mplcursors
 import subprocess
 import torch
 from transformers import CLIPProcessor, CLIPModel
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load embeddings
 storage_dir = "../application/storage"
 post_embeddings = os.path.join(storage_dir, "p_embeddings.json")
 images_folder = os.path.join(storage_dir, "images")
@@ -28,9 +26,16 @@ embeddings = load_json(post_embeddings)
 keys = list(embeddings.keys())
 embeddings_matrix = np.array([embeddings[key] for key in keys])
 
-# Load topic embeddings
 keywords = [
-    "cat", "dog", "bird",
+    "animal",
+    "vehicle",
+    "building",
+    "landscape",
+    "sport",
+    "food",
+    "technology",
+    "culture and art",
+    "room interior"
 ]
 
 model_name = "openai/clip-vit-base-patch32"
@@ -49,16 +54,15 @@ topic_embeddings = {keyword: get_text_embedding(keyword) for keyword in keywords
 topic_keys = list(topic_embeddings.keys())
 topic_embeddings_matrix = np.vstack([topic_embeddings[key] for key in topic_keys])
 
-# Compute new embeddings for topics using top-n similar images
-n = 5  # Number of top similar images to consider
+top_n = 10
 new_topic_embeddings = {}
 
 for i, topic in enumerate(topic_keys):
     topic_emb = topic_embeddings[topic]
     similarities = cosine_similarity(topic_emb, embeddings_matrix).flatten()
-    top_n_indices = np.argsort(similarities)[-n:]  # Indices of top-n most similar embeddings
+    top_n_indices = np.argsort(similarities)[-top_n:] 
     top_n_embeddings = embeddings_matrix[top_n_indices]
-    new_topic_emb = np.mean(top_n_embeddings, axis=0)  # Mean of top-n embeddings
+    new_topic_emb = np.mean(top_n_embeddings, axis=0) 
     new_topic_embeddings[topic] = new_topic_emb
 
 

@@ -28,9 +28,16 @@ embeddings = load_json(post_embeddings)
 keys = list(embeddings.keys())
 embeddings_matrix = np.array([embeddings[key] for key in keys])
 
-# Load topic embeddings
 keywords = [
-    "cat", "dog", "bird", "lion", "tiger", "pizza", "beach", "museum", "skyscraper", "soccer"
+    "animal",
+    "vehicle",
+    "building",
+    "landscape",
+    "sport",
+    "food",
+    "technology",
+    "culture and art",
+    "room interior"
 ]
 
 model_name = "openai/clip-vit-base-patch32"
@@ -63,12 +70,10 @@ for i, topic in enumerate(topic_keys):
 
 # Prepare data for PCA and visualization
 new_topic_embeddings_matrix = np.array([new_topic_embeddings[topic] for topic in topic_keys])
-combined_matrix = np.vstack((embeddings_matrix, new_topic_embeddings_matrix))
 
 pca = PCA(n_components=2)
-projected_combined = pca.fit_transform(combined_matrix)
-projected_embeddings = projected_combined[:len(embeddings_matrix)]
-projected_topics = projected_combined[len(embeddings_matrix):]
+projected_embeddings = pca.fit_transform(embeddings_matrix)
+projected_topics = pca.transform(np.array([new_topic_embeddings[topic] for topic in topic_keys]))
 
 explained_variance = pca.explained_variance_ratio_
 
@@ -107,17 +112,21 @@ ax.scatter(
     c='red',
     marker='x',
     s=100,
-    label='Topic Centers'
+    label='Topic Centers',
+    zorder=10
 )
 
 for i, topic in enumerate(topic_keys):
     ax.text(
-        projected_topics[i, 0],
+        projected_topics[i, 0] - .005,
         projected_topics[i, 1],
         topic,
         fontsize=9,
-        ha='right'
+        zorder=11,
+        ha='right',
+        bbox=dict(facecolor='white', alpha=0.8, edgecolor='none')
     )
 
+scatter = ax.scatter(projected_embeddings[:, 0], projected_embeddings[:, 1], cmap='tab10', s=10, alpha=0)
 ax.legend()
 plt.show()
