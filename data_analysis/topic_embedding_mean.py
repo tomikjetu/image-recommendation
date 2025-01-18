@@ -104,7 +104,7 @@ for i, topic in enumerate(topic_keys):
         ha='right'
     )
 
-ax.set_title('2D Projection of Image Embeddings and Updated Topic Centers')
+ax.set_title('PCA of Embeddings with Topic Centers (2 Components)')
 ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
 ax.legend()

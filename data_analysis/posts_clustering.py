@@ -28,7 +28,7 @@ embeddings_matrix = np.array([embeddings[key] for key in keys])
 pca = PCA(n_components=2)
 projected = pca.fit_transform(embeddings_matrix)
 
-n_clusters = 8
+n_clusters = 9
 kmeans = KMeans(n_clusters=n_clusters, random_state=42)
 labels = kmeans.fit_predict(projected)
 
@@ -44,7 +44,7 @@ scatter = ax.scatter(
     alpha=0.8      
 )
 
-ax.set_title('2D Projection of All Embeddings')
+ax.set_title('K-Means clustering')
 ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
 

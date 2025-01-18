@@ -78,8 +78,8 @@ explained_variance = pca.explained_variance_ratio_
 labels = []
 
 for emb in projected_embeddings:
-    similarities = cosine_similarity([emb], projected_topics).flatten()
-    closest_topic_index = np.argmax(similarities)
+    distances = np.linalg.norm(projected_topics - emb, axis=1)
+    closest_topic_index = np.argmin(distances)
     labels.append(closest_topic_index)
 
 labels = np.array(labels)
@@ -104,17 +104,18 @@ ax.scatter(
     s=100,
     label='Topic Centers'
 )
-
 for i, topic in enumerate(topic_keys):
     ax.text(
-        projected_topics[i, 0],
+        projected_topics[i, 0] - .005,
         projected_topics[i, 1],
         topic,
         fontsize=9,
-        ha='right'
+        zorder=11,
+        ha='right',
+        bbox=dict(facecolor='white', alpha=0.8, edgecolor='none')
     )
 
-ax.set_title('2D Projection of Image Embeddings and Updated Topic Centers')
+ax.set_title('PCA with Image Embedding clusters with Topic Centers (2 Components)')
 ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
 ax.legend()

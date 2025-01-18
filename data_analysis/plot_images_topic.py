@@ -79,7 +79,7 @@ explained_variance = pca.explained_variance_ratio_
 
 # Plotting
 fig, ax = plt.subplots(figsize=(12, 12))
-ax.set_title('2D Projection of Image Embeddings and Updated Topic Centers', fontsize=16)
+ax.set_title('PCA of Image Embedding with Topic Centers')
 ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
 

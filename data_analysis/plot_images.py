@@ -10,7 +10,7 @@ from PIL import Image
 storage_dir = "../application/storage"
 post_embeddings = os.path.join(storage_dir, "p_embeddings.json")
 images_folder = os.path.join(storage_dir, "images")
-n_images = 700
+n_images = 1000
 
 def load_json(file, default={}):
     try:
@@ -41,7 +41,7 @@ def load_image(file_path, size=(30, 30)):
         return None
 
 fig, ax = plt.subplots(figsize=(12, 12))
-ax.set_title(f'2D Principal analysis showing {n_images} images', fontsize=16)
+ax.set_title(f'PCA showing {n_images} images', fontsize=16)
 ax.set_xlabel(f'Principal Component 1 ({pca.explained_variance_ratio_[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({pca.explained_variance_ratio_[1]*100:.2f}% variance)')
 
