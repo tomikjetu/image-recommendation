@@ -115,7 +115,7 @@ for i, topic in enumerate(topic_keys):
         bbox=dict(facecolor='white', alpha=0.8, edgecolor='none')
     )
 
-ax.set_title('PCA with Image Embedding clusters with Topic Centers (2 Components)')
+ax.set_title('PCA of Embedding clusters with Topic Centers (2 Components)')
 ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
 ax.legend()
