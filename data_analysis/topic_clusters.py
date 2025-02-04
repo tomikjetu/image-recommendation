@@ -59,7 +59,8 @@ new_topic_embeddings = {}
 
 for i, topic in enumerate(topic_keys):
     topic_emb = topic_embeddings[topic]
-    similarities = cosine_similarity(topic_emb, embeddings_matrix).flatten()
+    topic_emb_reshaped = topic_emb.reshape(1, -1)
+    similarities = cosine_similarity(topic_emb_reshaped, embeddings_matrix).flatten()
     top_n_indices = np.argsort(similarities)[-top_n:]  # Indices of top-n most similar embeddings
     top_n_embeddings = embeddings_matrix[top_n_indices]
     new_topic_emb = np.mean(top_n_embeddings, axis=0)  # Mean of top-n embeddings

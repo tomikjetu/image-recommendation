@@ -84,7 +84,7 @@ ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
 
 # Plot images
-n_images = 700
+n_images = 1000
 random_indices = np.random.choice(len(projected_embeddings), n_images, replace=False)
 
 def load_image(file_path, size=(30, 30)):

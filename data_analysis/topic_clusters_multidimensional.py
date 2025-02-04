@@ -93,7 +93,7 @@ scatter = ax.scatter(
     c=labels,
     cmap='tab10',
     s=50,
-    alpha=0.8,
+    alpha=0.5,
     label='Image Embeddings'
 )
 

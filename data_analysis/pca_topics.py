@@ -20,7 +20,6 @@ keywords_file = "all_topics.json"
 with open(keywords_file, "r") as f:
     keywords = json.load(f)
 
-
 embeddings = {keyword: get_text_embedding(keyword) for keyword in keywords}
 keys = list(embeddings.keys())
 
@@ -37,9 +36,20 @@ explained_variance = pca.explained_variance_ratio_
 
 fig, ax = plt.subplots(figsize=(1, 1))
 scatter = ax.scatter(projected[:, 0], projected[:, 1])
+import random
 for i, key in enumerate(keys):
-    ax.annotate(key, (projected[i, 0], projected[i, 1]))
-ax.set_title('PCA of All Topics')
+    # Randomly sample 5% of the keys
+    if random.random() < 0.05:
+        ax.text(
+            projected[i, 0] - .005,
+            projected[i, 1],
+            key,
+            fontsize=9,
+            zorder=11,
+            ha='left',
+            bbox=dict(facecolor='white', alpha=0.8, edgecolor='none')
+        )
+ax.set_title(f'PCA of All Topics')
 ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
 

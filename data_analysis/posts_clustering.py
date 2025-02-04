@@ -41,7 +41,7 @@ scatter = ax.scatter(
     c=labels, 
     cmap='tab10',  
     s=50,          
-    alpha=0.8      
+    alpha=0.5      
 )
 
 ax.set_title('K-Means clustering')

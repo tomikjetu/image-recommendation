@@ -28,7 +28,7 @@ projected = pca.fit_transform(embeddings_matrix)
 explained_variance = pca.explained_variance_ratio_
 
 fig, ax = plt.subplots(figsize=(1, 1))
-scatter = ax.scatter(projected[:, 0], projected[:, 1])
+scatter = ax.scatter(projected[:, 0], projected[:, 1],alpha=0.5)
 ax.set_title('2D Projection of All Embeddings')
 ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
