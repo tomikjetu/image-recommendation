@@ -54,7 +54,7 @@ topic_embeddings = {keyword: get_text_embedding(keyword) for keyword in keywords
 topic_keys = list(topic_embeddings.keys())
 topic_embeddings_matrix = np.vstack([topic_embeddings[key] for key in topic_keys])
 
-top_n = 5  
+top_n = 200
 new_topic_embeddings = {}
 
 for i, topic in enumerate(topic_keys):
