@@ -8,6 +8,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from termcolor import colored
 import json
 
+REVIEW = False
+
 model_name = "openai/clip-vit-base-patch32"
 model = CLIPModel.from_pretrained(model_name)
 processor = CLIPProcessor.from_pretrained(model_name)
@@ -60,7 +62,16 @@ for category in os.listdir(base_dir):
 
         # Compute cosine similarity
         similarities = cosine_similarity(image_embedding, keyword_matrix)
-        predicted_category = list(keyword_embeddings.keys())[np.argmax(similarities)]
+
+        if REVIEW:
+            sorted_indices = np.argsort(similarities[0])[::-1]
+            sorted_categories = [list(keyword_embeddings.keys())[i] for i in sorted_indices]
+            sorted_similarities = [similarities[0][i] for i in sorted_indices]
+            
+            for i in range(min(20, len(sorted_categories))):
+                print(f"{sorted_categories[i]}: {sorted_similarities[i]:.4f}")
+            input("Press Enter to continue...")
+            predicted_category = list(keyword_embeddings.keys())[np.argmax(similarities)]
         
         # Track results
         total_images += 1
