@@ -4,10 +4,17 @@ import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import normalize
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import subprocess
 import torch
 from transformers import CLIPProcessor, CLIPModel
 from sklearn.metrics.pairwise import cosine_similarity
+
+from termcolor import colored
+def rgba_to_terminal_color(rgba):
+    r, g, b, _ = rgba  # Ignore alpha channel
+    return f"\033[38;2;{int(r*255)};{int(g*255)};{int(b*255)}m"
+
 
 storage_dir = "../application/storage"
 post_embeddings = os.path.join(storage_dir, "p_embeddings.json")
@@ -76,11 +83,16 @@ projected_topics = pca.transform(np.array([new_topic_embeddings[topic] for topic
 explained_variance = pca.explained_variance_ratio_
 
 labels = []
+seen_labels = set()  # Track labels that have already been printed
 
 for emb in embeddings_matrix:
     similarities = cosine_similarity([emb], new_topic_embeddings_matrix).flatten()
     closest_topic_index = np.argmax(similarities)
+    
     labels.append(closest_topic_index)
+    
+    if closest_topic_index not in seen_labels:
+        seen_labels.add(closest_topic_index)
 
 labels = np.array(labels)
 
@@ -97,6 +109,19 @@ scatter = ax.scatter(
     label='Image Embeddings'
 )
 
+cmap = scatter.cmap
+norm = scatter.norm
+
+# Get unique labels
+unique_labels = np.unique(labels)
+
+# Generate legend patches
+legend_patches = [
+    mpatches.Patch(color=scatter.cmap(scatter.norm(label)), label=topic_keys[label])
+    for label in unique_labels
+]
+
+ax.legend(handles=legend_patches, title="Topics", loc="upper right", fontsize="medium")
 ax.set_title('PCA of Embedding clusters (Full vectors)')
 ax.set_xlabel(f'Principal Component 1 ({explained_variance[0]*100:.2f}% variance)')
 ax.set_ylabel(f'Principal Component 2 ({explained_variance[1]*100:.2f}% variance)')
