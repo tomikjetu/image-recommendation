@@ -1,0 +1,41 @@
+positive_keywords = ["animal", "savana"]
+negative_keywords = []
+
+Keyword: savana, Similarity: 0.9895
+Keyword: animal, Similarity: 0.9323
+Keyword: cheetah, Similarity: 0.3185
+Keyword: jersey, Similarity: 0.3172
+Keyword: wolf, Similarity: 0.3171
+Post: f3efefa98e21479eb3d4c6217bed98fd, Similarity: 0.2741, (giraffe, gazelle, kangaroo)
+Post: 3180239d2ace4e0a8bfb22a95707d88d, Similarity: 0.2673, (donkey, gazelle, kangaroo)
+Post: 009c26a6bcb5407cb4b5ea1f23c243c6, Similarity: 0.2686, (alpaca, donkey, llama)
+Post: 62adbddc50b2446798ed5feafeb0cd75, Similarity: 0.2678, (ostrich, gazelle, kangaroo)
+Post: 6ddc13990e504d1f8da22813edaa03f8, Similarity: 0.2680, (giraffe, gazelle, kangaroo)
+
+# Negative Weight = 0.05
+positive_keywords = ["animal", "savana"]
+negative_keywords = ["zebra"]
+
+Keyword: savana, Similarity: 0.9888
+Keyword: animal, Similarity: 0.9160
+Keyword: coop, Similarity: 0.3120
+Keyword: cheetah, Similarity: 0.3107
+Keyword: wolf, Similarity: 0.3105
+Post: 62adbddc50b2446798ed5feafeb0cd75, Similarity: 0.2678, (ostrich, gazelle, kangaroo)
+Post: f3efefa98e21479eb3d4c6217bed98fd, Similarity: 0.2741, (giraffe, gazelle, kangaroo)
+Post: 009c26a6bcb5407cb4b5ea1f23c243c6, Similarity: 0.2686, (alpaca, donkey, llama)
+Post: 1924324ff79542b9acffbf5748abad96, Similarity: 0.2639, (boar, warthog, aardvark)
+Post: 4fba18de9f944795b2241285ee501512, Similarity: 0.2612, (kangaroo, gazelle, antelope)
+
+
+# Negative Weight = 0.1
+Keyword: savana, Similarity: 0.9732
+Keyword: animal, Similarity: 0.8816
+Keyword: can, Similarity: 0.8726
+Keyword: crank, Similarity: 0.8706
+Keyword: swab, Similarity: 0.8703
+Post: 50025b101dbe4a2daa360fe05cd7b6c0, Similarity: 0.2684, (hawk, eagle, bird, pheasant, leg)
+Post: 62adbddc50b2446798ed5feafeb0cd75, Similarity: 0.2658, (ostrich, llama, savana, alpaca, stilt)
+Post: c6d07469b048429584c103733e6f86cd, Similarity: 0.2647, (polar_bear, bear, fur_coat, snowball, animal)
+Post: 690067e05998463aa4cc9a6a21ab2681, Similarity: 0.2635, (hyena, coyote, boar, cheetah, savana)
+Post: 1924324ff79542b9acffbf5748abad96, Similarity: 0.2632, (boar, warthog, aardvark, rhinoceros, bison)
