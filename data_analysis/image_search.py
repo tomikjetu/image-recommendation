@@ -51,16 +51,17 @@ def open_image(image_path):
         # subprocess.run(["xdg-open", image_path])
 #
 if __name__ == "__main__":
-    query = input("Enter your search query: ").strip()
-    top_k = 5 
-    
-    if embeddings:
-        results = search_files(query, embeddings, top_k=top_k)
-        print("\nSearch Results:")
-        for filename, score in results:
-            image_path = os.path.join(images_folder, f"{filename}.jpg")
-            print(f"File: {filename} (Similarity: {score:.4f})")
-            print(f"Opening: {image_path}")
-            open_image(image_path)
-    else:
-        print("No embeddings found.")
+    while True:
+        query = input("Enter your search query: ").strip()
+        top_k = 5 
+        
+        if embeddings:
+            results = search_files(query, embeddings, top_k=top_k)
+            print("\nSearch Results:")
+            for filename, score in results:
+                image_path = os.path.join(images_folder, f"{filename}.jpg")
+                print(f"File: {filename} (Similarity: {score:.4f})")
+                print(f"Opening: {image_path}")
+                open_image(image_path)
+        else:
+            print("No embeddings found.")
