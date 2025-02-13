@@ -52,12 +52,25 @@ def get_text_embedding(text):
 
 topic_embeddings = {keyword: get_text_embedding(keyword) for keyword in keywords}
 topic_keys = list(topic_embeddings.keys())
+topic_embeddings_matrix = np.vstack([topic_embeddings[key] for key in topic_keys])
+
+top_n = 200
+new_topic_embeddings = {}
+
+for i, topic in enumerate(topic_keys):
+    topic_emb = topic_embeddings[topic]
+    topic_emb_reshaped = topic_emb.reshape(1, -1)
+    similarities = cosine_similarity(topic_emb_reshaped, embeddings_matrix).flatten()
+    top_n_indices = np.argsort(similarities)[-top_n:]  # Indices of top-n most similar embeddings
+    top_n_embeddings = embeddings_matrix[top_n_indices]
+    new_topic_emb = np.mean(top_n_embeddings, axis=0)  # Mean of top-n embeddings
+    new_topic_embeddings[topic] = new_topic_emb
+
 
 pca = PCA(n_components=2)
 projected_embeddings = pca.fit_transform(embeddings_matrix)
-projected_topics = pca.transform(
-    np.array([topic_embeddings[topic].squeeze() for topic in topic_keys])
-)
+projected_topics = pca.transform(np.array([new_topic_embeddings[topic] for topic in topic_keys]))
+
 explained_variance = pca.explained_variance_ratio_
 
 labels = []
