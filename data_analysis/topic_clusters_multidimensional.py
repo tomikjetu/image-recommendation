@@ -96,6 +96,15 @@ for emb in embeddings_matrix:
 
 labels = np.array(labels)
 
+# Dump original embeddings to JSON, clustered by labels
+output_file = os.path.join(storage_dir, "clustered_embeddings.json")
+output_data = {topic_keys[label]: {} for label in seen_labels}
+
+for key, label in zip(keys, labels):
+    output_data[topic_keys[label]][key] = embeddings[key]
+
+with open(output_file, "w") as f:
+    json.dump(output_data, f)
 
 # Plotting
 fig, ax = plt.subplots(figsize=(10, 10))
