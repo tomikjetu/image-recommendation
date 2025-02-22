@@ -1,5 +1,7 @@
 positive_keywords = ["animal", "savana"]
-negative_keywords = []
+negative_keywords = ["zebra"]
+
+# Negative Weight = 0
 
 Keyword: savana, Similarity: 0.9895
 Keyword: animal, Similarity: 0.9323
@@ -13,8 +15,6 @@ Post: 62adbddc50b2446798ed5feafeb0cd75, Similarity: 0.2678, (ostrich, gazelle, k
 Post: 6ddc13990e504d1f8da22813edaa03f8, Similarity: 0.2680, (giraffe, gazelle, kangaroo)
 
 # Negative Weight = 0.05
-positive_keywords = ["animal", "savana"]
-negative_keywords = ["zebra"]
 
 Keyword: savana, Similarity: 0.9888
 Keyword: animal, Similarity: 0.9160
@@ -39,3 +39,15 @@ Post: 62adbddc50b2446798ed5feafeb0cd75, Similarity: 0.2658, (ostrich, llama, sav
 Post: c6d07469b048429584c103733e6f86cd, Similarity: 0.2647, (polar_bear, bear, fur_coat, snowball, animal)
 Post: 690067e05998463aa4cc9a6a21ab2681, Similarity: 0.2635, (hyena, coyote, boar, cheetah, savana)
 Post: 1924324ff79542b9acffbf5748abad96, Similarity: 0.2632, (boar, warthog, aardvark, rhinoceros, bison)
+
+# Negative weight 0.15
+Keyword: savana, Similarity: 0.9303
+Keyword: swab, Similarity: 0.8214
+Keyword: animal, Similarity: 0.8174
+Keyword: crank, Similarity: 0.8166
+Keyword: can, Similarity: 0.8158
+Post: 50025b101dbe4a2daa360fe05cd7b6c0, Similarity: 0.2685, (hawk, eagle, bird, pheasant, leg)
+Post: 77f843b636924ef58d0b141df3e81e63, Similarity: 0.2610, (fox, marmalade, fur_coat, coyote, orange)
+Post: 19af7115d9da4372a0083d6d46a87825, Similarity: 0.2607, (beaver, groundhog, gopher, mongoose, otter)
+Post: c6d07469b048429584c103733e6f86cd, Similarity: 0.2586, (polar_bear, bear, fur_coat, snowball, animal)
+Post: 3b2aa16154074d60bf0bceeabdaeb2f7, Similarity: 0.2585, (pheasant, peacock, quill, cornucopia, bird)
