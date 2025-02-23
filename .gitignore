@@ -1,2 +1,4 @@
 __pycache__
 application/storage/**/*[.json|.jpg]
+benchmark/pinterest_data
+benchmark/pinterest_iccv
