@@ -21,7 +21,6 @@ def download_image(url, filename):
 # Download images
 for pin in tqdm(pins, desc="Downloading Images"):
     if os.path.exists(os.path.join(image_dir, f"{pin['pin_id']}.jpg")):
-        print(f"Skipping {pin['pin_id']}")
         continue
     if "im_url" in pin:
         image_url = pin["im_url"]
