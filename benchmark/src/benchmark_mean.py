@@ -46,7 +46,7 @@ if __name__ == "__main__":
             print(f"Top K: {k}")
             for board in tqdm(filled_boards, desc="Evaluating boards"):
                 board_pins = board["pins"]
-                train_pins, test_pins = split_board_pins(board_pins, test_size=0.2)
+                train_pins, test_pins = split_board_pins(board_pins, test_size=split)
 
                 board_embedding = get_board_mean_embedding(train_pins, image_embeddings) # Train pins for embeddings
                 recommended_images = recommend_images(board_embedding, image_embeddings, k)
