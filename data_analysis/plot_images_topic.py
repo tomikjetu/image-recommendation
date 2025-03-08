@@ -14,6 +14,13 @@ from transformers import CLIPProcessor, CLIPModel
 # Load embeddings
 storage_dir = "../application/storage"
 post_embeddings = os.path.join(storage_dir, "p_embeddings.json")
+suffix = ".jpg"
+
+# storage_dir = "../benchmark/pinterest_data"
+# post_embeddings = os.path.join(storage_dir, "image_embeddings.npz")
+# embeddings = np.load(post_embeddings, allow_pickle=True)
+suffix = ""
+
 images_folder = os.path.join(storage_dir, "images")
 
 def load_json(file, default={}):
@@ -98,7 +105,7 @@ def load_image(file_path, size=(30, 30)):
 
 for i in random_indices:
     x, y = projected_embeddings[i]
-    image_path = os.path.join(images_folder, f"{keys[i]}.jpg")
+    image_path = os.path.join(images_folder, f"{keys[i]}{suffix}")
     img = load_image(image_path)
     if img is not None:
         imagebox = OffsetImage(img, zoom=0.75)
