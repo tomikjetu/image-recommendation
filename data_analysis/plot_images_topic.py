@@ -19,7 +19,7 @@ suffix = ".jpg"
 # storage_dir = "../benchmark/pinterest_data"
 # post_embeddings = os.path.join(storage_dir, "image_embeddings.npz")
 # embeddings = np.load(post_embeddings, allow_pickle=True)
-suffix = ""
+# suffix = ""
 
 images_folder = os.path.join(storage_dir, "images")
 
