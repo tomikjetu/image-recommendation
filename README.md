@@ -189,7 +189,7 @@ This research analysed [CLIP](https://openai.com/index/clip/) model for recommen
 
 > [Benchmark source code](./benchmark/src/benchmark_session.py)
 
-Formulas shwon in the [Paper](https://scispace.com/pdf/a-personalised-session-based-recommender-system-with-5zjyjt67li.pdf)
+Formulas shown in the [Paper](https://scispace.com/pdf/a-personalised-session-based-recommender-system-with-5zjyjt67li.pdf)
 
 
 ## Conclusion
