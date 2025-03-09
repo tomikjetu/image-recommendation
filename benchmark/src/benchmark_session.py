@@ -86,7 +86,6 @@ if __name__ == "__main__":
                 sum_ndcg += ndcg
                 sum_hr += hit
 
-            print("-" * 50)
             time_end = time.time()
             print(f"Time elapsed: {time_end - time_start:.2f}s")
 
@@ -95,7 +94,9 @@ if __name__ == "__main__":
             avg_ndcg = sum_ndcg / len(test_boards)
             avg_hr = sum_hr / len(test_boards)
             print(f"Average Precision@{k}: {avg_precision:.3f}, Average Recall@{k}: {avg_recall:.3f}, Average NDCG@{k}: {avg_ndcg:.3f}, Average HitR@{k}: {avg_hr:.3f}")
-            average_board_pins = sum(len(board["pins"]) for board in boards) / len(boards)
-            print(f"Average board pins: {average_board_pins:.2f}")
-            results[split][k] = (avg_precision, avg_recall, avg_ndcg, avg_hr)
+            results[split][k] = {"precision": avg_precision, "recall": avg_recall, "ndcg": avg_ndcg, "hit": avg_hr}
+            print("-" * 25)
+        print("-" * 50)
     print(results)
+    average_board_pins = sum(len(board["pins"]) for board in boards) / len(boards)
+    print(f"Average board pins: {average_board_pins:.2f}")
