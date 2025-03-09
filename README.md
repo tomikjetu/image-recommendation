@@ -184,27 +184,12 @@ This research analysed [CLIP](https://openai.com/index/clip/) model for recommen
 
 > [Benchmark source code](./benchmark/src/benchmark_mean.py)
 
-$$
-\bar{E}_p = \frac{\sum_{i=1}^{N_p} w_i \cdot \bar{e}_i}{\sum_{i=1}^{N_p} w_i} \quad \text{and} \quad \bar{E}_n = \frac{\sum_{j=1}^{N_n} w_j \cdot \bar{e}_j}{\sum_{j=1}^{N_n} w_j}
-$$
-
-
-$$
-\bar{E} = w_p \cdot \bar{E}_p - w_n \cdot \bar{E}_n
-$$
 
 ### Session-Based embedding
 
 > [Benchmark source code](./benchmark/src/benchmark_session.py)
 
-$$
-\alpha_1 = \frac{\cos(f_{\theta}(v_i), s_u) + 1}{2}, \quad \alpha_2 = 1 - \alpha_1
-$$
-
-$$
-s_u^{t} = \alpha_1 s_u^{t-1} + \alpha_2 f_{\theta}(v_i)
-$$
-with the rest of the formulas shwon in the [Paper](https://scispace.com/pdf/a-personalised-session-based-recommender-system-with-5zjyjt67li.pdf)
+Formulas shwon in the [Paper](https://scispace.com/pdf/a-personalised-session-based-recommender-system-with-5zjyjt67li.pdf)
 
 
 ## Conclusion
