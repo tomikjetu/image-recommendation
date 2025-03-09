@@ -2,6 +2,8 @@
 
 This research analysed [CLIP](https://openai.com/index/clip/) model for recommendation system. A zero-shot classification model that generates embeddings for both text and images. CLIP allows for semantic matching between these embeddings, enabling new approaches for item retrieval and recommendation.
 
+This project includes benchmarks for two algorithms, data analysis for Thigs dataset using PCA and clustering using K-Means as well as CLIP topic embeddings. On top it includes an application with user profiles and recommendation within web browser.
+
 ![Results](./data_analysis/graphs/2/photo-collage.png)
 
 ## Datasets
