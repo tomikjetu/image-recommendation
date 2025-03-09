@@ -202,7 +202,7 @@ $$
 $$
 
 $$
-s_u^{(\text{t})} = \alpha_1 s_u^{(\text{t-1})} + \alpha_2 f_{\theta}(v_i)
+s_u^{t} = \alpha_1 s_u^{t-1} + \alpha_2 f_{\theta}(v_i)
 $$
 with the rest of the formulas shwon in the [Paper](https://scispace.com/pdf/a-personalised-session-based-recommender-system-with-5zjyjt67li.pdf)
 
