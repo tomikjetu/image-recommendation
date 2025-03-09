@@ -188,6 +188,7 @@ $$
 \bar{E}_p = \frac{\sum_{i=1}^{N_p} w_i \cdot \bar{e}_i}{\sum_{i=1}^{N_p} w_i} \quad \text{and} \quad \bar{E}_n = \frac{\sum_{j=1}^{N_n} w_j \cdot \bar{e}_j}{\sum_{j=1}^{N_n} w_j}
 $$
 
+
 $$
 \bar{E} = w_p \cdot \bar{E}_p - w_n \cdot \bar{E}_n
 $$
@@ -201,7 +202,7 @@ $$
 $$
 
 $$
-s_u^{(t)} = \alpha_1 s_u^{(t-1)} + \alpha_2 f_{\theta}(v_i)
+s_u^{(\text{t})} = \alpha_1 s_u^{(\text{t-1})} + \alpha_2 f_{\theta}(v_i)
 $$
 with the rest of the formulas shwon in the [Paper](https://scispace.com/pdf/a-personalised-session-based-recommender-system-with-5zjyjt67li.pdf)
 
