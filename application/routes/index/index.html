@@ -99,6 +99,43 @@
         margin-top: 10px;
         font-size: 16px;
     }
+
+    #search_wrapper {
+        display: flex;
+        gap: 8px;
+        margin: 16px auto;
+        
+        max-width: 400px;
+    }
+
+    #search_wrapper input {
+        padding: 8px 12px;
+        border: 1px solid black;
+        background-color: white;
+        color: black;
+        font-size: 14px;
+        flex-grow: 1;
+    }
+
+    #search_wrapper>button {
+        padding: 8px 16px;
+        background-color: black;
+        color: white;
+        border: 1px solid black;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s ease;
+    }
+
+    #search_wrapper>button:hover {
+        background-color: white;
+        color: black;
+    }
+
+    #search_wrapper input:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
 </style>
 
 <body>
@@ -112,6 +149,10 @@
     </div>
 
     <div id="data_wrapper" class="post">
+        <div id="search_wrapper">
+            <input placeholder="Query search">
+            <button onclick="query()">Query</button>
+        </div>
         <div id="post_image_wrapper" style="margin-top: 20px;">
             <img id="post_image" src="" alt="Post Image" />
         </div>
@@ -154,11 +195,11 @@
                         </g>
                     </g>
                 </svg></button>
-                <button style="background: red;" onclick="close_session()">X</button>
+            <button style="background: red;" onclick="close_session()">X</button>
         </div>
     </div>
 
-    
+
     <script>
         var loading = false;
         getPost();
@@ -171,7 +212,7 @@
 
         // Function to fetch and display post data and image
         function getPost() {
-            if(loading == true) return;
+            if (loading == true) return;
             setLoading(true);
             fetch("/get_recommendation")
                 .then(response => response.json())
@@ -184,7 +225,7 @@
 
         // Function to like a post
         function likePost(postId) {
-            if(loading == true) return;
+            if (loading == true) return;
             setLoading(true);
             const userId = getUserId();
 
@@ -207,8 +248,8 @@
                 });
         }
 
-        function close_session(){
-            if(loading == true) return;
+        function close_session() {
+            if (loading == true) return;
             setLoading(true);
             const userId = getUserId();
             const data = { user_id: userId };
@@ -256,6 +297,22 @@
         // Function to generate a new user ID
         function generateUserId() {
             return 'user_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        function query(){
+            if (loading == true) return;
+            setLoading(true);
+            const query = document.querySelector("#search_wrapper input").value;
+            document.querySelector("#search_wrapper input").value = "";
+            fetch(`/query?query=${query}`)
+                .then(response => response.json())
+                .catch(error => {
+                    alert(`Error: ${error.message}`);
+                })
+                .finally(() => {
+                    setLoading(false);
+                    getPost();
+                });
         }
     </script>
 

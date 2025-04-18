@@ -13,31 +13,38 @@ from recommendation.similar_user import similar_users
 from recommendation.session_recommendation import session_recommendation
 
 
-session_id = uuid.uuid4().hex
+session_ids = {}
+
+def close_user_session(user_id):
+    global session_ids
+    if not user_id in session_ids:
+        return
+
+    last_session = sessions[user_id].get(session_ids[user_id])
+    if last_session is None:
+        return
+    if u_embeddings.get(user_id) is None:
+        u_embeddings[user_id] = last_session
+    else:
+        user_embedding = last_session
+        weight = 0
+        for session in sessions.get(user_id).values():
+            if session == last_session:
+                continue
+            beta = (cosine_similarity(np.array(last_session).reshape(1, -1), np.array(session).reshape(1, -1))[0][0] + 1) / 2
+            user_embedding += beta * np.array(session)
+            weight += beta
+        user_embedding = user_embedding / weight
+        u_embeddings[user_id] = user_embedding.tolist()
+
+    session_ids[user_id] = uuid.uuid4().hex
+    save_json(u_embedding_file, u_embeddings)
 
 @app.route("/close_session", methods=['POST'])
 def close_session():
-    global session_id
-    for user in users.keys():
-        last_session = sessions[user].get(session_id)
-        if last_session is None:
-            continue
-        if u_embeddings.get(user) is None:
-            u_embeddings[user] = last_session
-        else:
-            user_embedding = last_session
-            weight = 0
-            for session in sessions.get(user).values():
-                if session == last_session:
-                    continue
-                beta = (cosine_similarity(np.array(last_session).reshape(1, -1), np.array(session).reshape(1, -1))[0][0] + 1) / 2
-                user_embedding += beta * np.array(session)
-                weight += beta
-            user_embedding = user_embedding / weight
-            u_embeddings[user] = user_embedding.tolist()
-
-    session_id = uuid.uuid4().hex
-    save_json(u_embedding_file, u_embeddings)
+    global session_ids
+    user_id = request.cookies.get('user_id')
+    close_user_session(user_id)
     return {'message': 'Session closed'}, 200
 
 @app.route('/get_recommendation', methods=['GET'])

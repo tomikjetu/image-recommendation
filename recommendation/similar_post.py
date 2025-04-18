@@ -2,8 +2,6 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 from application.storage.storage_manager import users, p_embeddings
-from embedding.user_embedding import embed_user
-from recommendation.cold_start import cold_start
 
 def similar_posts(user_id, embedding, top_n=5):
     user = users[user_id]

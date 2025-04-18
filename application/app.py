@@ -10,6 +10,7 @@ import application.routes.api.upload_image
 import application.routes.api.get_image
 import application.routes.api.get_recommendation
 import application.routes.api.interaction_like
+import application.routes.api.search
 
 def run(): 
     print("Starting server")
