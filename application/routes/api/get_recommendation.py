@@ -17,6 +17,10 @@ session_ids = {}
 
 def close_user_session(user_id):
     global session_ids
+
+    if user_id in recommendation_storage:
+        recommendation_storage[user_id] = []
+
     if not user_id in session_ids:
         return
 
